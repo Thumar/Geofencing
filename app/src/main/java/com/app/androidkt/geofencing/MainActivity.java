@@ -106,7 +106,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         Log.d(TAG, "Start geofencing monitoring call");
         pendingIntent = getGeofencePendingIntent();
         geofencingRequest = new GeofencingRequest.Builder()
-                .setInitialTrigger(Geofence.GEOFENCE_TRANSITION_ENTER)
                 .addGeofence(getGeofence())
                 .build();
 
@@ -140,7 +139,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .setExpirationDuration(Geofence.NEVER_EXPIRE)
                 .setCircularRegion(latLng.latitude, latLng.longitude, Constants.GEOFENCE_RADIUS_IN_METERS)
                 .setNotificationResponsiveness(1000)
-                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_EXIT)
+                .setLoiteringDelay(10000)
+                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_DWELL | Geofence.GEOFENCE_TRANSITION_EXIT)
                 .build();
     }
 
